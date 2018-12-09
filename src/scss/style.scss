@@ -1,0 +1,254 @@
+//~~~~~~~~Variables~~~~~~~~~
+$color_pink: #F57C8F;
+$color_yellow: #F9AC10;
+$color_mint: #c2ffa2;
+$color_blue: #76CCF5;
+$color_liliac: #C394F6;
+$color_gray_light: #D8D8D8;
+$color_gray: #8B8889;
+$color_gray_dark: #42424C;
+//--------------------------
+$breakpoint_small: 650px;
+$breakpoint_medium: 900px;
+//--------------------------
+$button_background: linear-gradient(130deg, 
+    $color_yellow 0%, $color_yellow 25%, 
+    $color_pink 25%, $color_pink 50%, 
+    $color_liliac 50%, $color_liliac 75%,
+    $color_blue 75%, $color_blue 100%);
+
+//~~~~~~~~Mixins~~~~~~~~~
+@mixin button_box_shadow($color1, $color2) {
+    box-shadow: 1px 13px 40px -13px $color1, 1px 13px 30px -13px $color2;
+}
+@mixin button($background) {
+    padding: 18px 30px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 18px;
+    border-radius: 30px;
+    border: none;
+    transition: 0.6s;
+    background: $background;
+}
+@mixin subtitle{
+    font-size: 40px;
+    color: $color_gray_dark;
+    font-weight: 300;
+}
+@mixin flex_wrap{
+    display: flex;
+    flex-wrap: wrap;
+    text-align: left;
+}
+@mixin container($max-width){
+    max-width: $max-width;
+    margin: auto;
+    text-align: center;
+}
+
+body{
+    margin: 0;
+    font-family: 'Chivo', sans-serif;
+}
+html {
+    scroll-behavior: smooth;
+  }
+.Navbar{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 60px;
+    @media all and (min-width: $breakpoint_small) {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    &__logo{
+        align-self: center;
+        flex: 1 50%;
+        font-weight: 700;
+        p{
+            max-width: 450px;
+            margin: auto;
+        }
+    }
+    &__menu{
+        @media all and (min-width: $breakpoint_small) {
+            align-self: center;
+          }
+        flex: 1 50%;
+        ul{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            display: inline;
+            &:hover{
+                cursor: pointer;
+            }
+            a{
+                color: #fff;
+                text-decoration: none;
+            }
+           
+        }
+    }
+   
+}
+.Header{
+    display: flex;
+    height: 400px;
+    @media all and (max-width: $breakpoint_small) {
+        flex-wrap: wrap;
+      }
+    &__content{
+        flex: 1 50%;
+        align-self: center;
+        @media all and (max-width: $breakpoint_small) {
+            text-align: center;
+        }
+        h1{
+            text-transform: capitalize;
+            font-size: 50px;
+            margin: auto;
+            max-width: 450px;
+            font-weight: 300;
+            color: $color_gray_dark;
+            @media all and (max-width: $breakpoint_small) {
+                font-size: 40px;
+            }
+        }
+        p{
+            margin: 30px auto;
+            font-size: 25px;
+            max-width: 450px;
+            color: $color_gray;
+        }
+
+        @media all and (max-width: $breakpoint_small) {
+            order: 2;
+            flex-basis: 100%;
+        }
+    }
+    &__button{
+        max-width: 450px;
+        margin: auto;
+        button{
+            @include button($button_background);
+            @include button_box_shadow($color_pink, $color_blue);
+            color: white;
+            &:hover{
+                text-shadow: 2px 2px 4px #32323e;
+                cursor: pointer;
+                @include button_box_shadow(darken($color_pink, 10%), $color_blue);
+            }
+
+        }
+    }
+    &__block{
+        display: flex;
+        justify-content: center;
+        font-family: 'Medula One', cursive;
+        flex: 1 50%;
+        margin-top: -60px;
+        z-index: -1;
+        background: linear-gradient(50deg, 
+            $color_yellow 0%, $color_yellow 10%, 
+            $color_pink 10%, $color_pink 20%, 
+            $color_liliac 20%, $color_liliac 30%,
+            $color_blue 30%, $color_blue 40%,
+            $color_yellow 40%, $color_yellow 50%,
+            $color_pink 50%, $color_pink 60%, 
+            $color_liliac 60%, $color_liliac 70%,
+            $color_blue 70%, $color_blue 80%,
+            $color_yellow 80%, $color_yellow 90%,
+            $color_pink 90%, $color_pink 100%
+        );
+        p{
+            color: rgba(255,255,255,0.8);
+            font-size: 300px;
+            align-self: flex-end;
+            margin: 0 0 -70px 0;
+            @media all and (max-width: $breakpoint_medium) {
+                font-size: 150px;
+                margin: 20px 0 -30px
+            }
+        }
+    }
+}
+.Brands{
+    margin: 30px 0;
+    display: flex;
+    justify-content: space-evenly;
+    color: $color_gray_light;
+    @media all and (max-width: $breakpoint_small) {
+        margin-top: 60px;
+    }
+    i{
+        font-size: 50px;
+        @media all and (max-width: $breakpoint_small) {
+            font-size: 35px;
+        }
+    }
+}
+.About{
+    @include container(500px);
+    h2{
+        @include subtitle;
+    }
+    p{
+        font-size: 24px;
+        color: $color_gray;
+    }
+    button{
+        @include button(#fff);
+        border: 1px solid $color_gray_dark;
+        color: $color_gray_dark;
+        &:hover{
+            background: $button_background;
+            border-color: transparent;
+            cursor: pointer;
+            color: #fff;
+            @include button_box_shadow($color_pink, $color_blue);
+        }
+    }
+}
+.Process{
+    @include container(1200px);
+    h2{
+        @include subtitle();
+    }
+    &__wrap{
+        @include flex_wrap();
+        div{
+            flex: 1 0 30%;
+            margin: 20px calc(10%/6);
+            box-shadow: 1px 17px 70px -20px lighten($color_pink, 0.9),  4px 10px 40px -8px $color_gray_light;
+            @media all and (max-width: $breakpoint_small) {
+                flex-basis: 100%;
+                margin: 20px 0;
+            }
+            h3{
+                margin: 40px 10% 20px;
+                color: $color_gray_dark;
+                font-size: 30px;
+                font-weight: 300;
+                max-width: 200px;
+            }
+            p{
+                margin: 0 10%;
+                line-height: 2;
+                font-size: 20px;
+                color: $color_gray;
+                &:last-child{
+                    margin: 10px 10% 40px;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
