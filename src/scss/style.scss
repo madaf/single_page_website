@@ -21,6 +21,16 @@ $button_background: linear-gradient(130deg,
 @mixin button_box_shadow($color1, $color2) {
     box-shadow: 1px 13px 40px -13px $color1, 1px 13px 30px -13px $color2;
 }
+@mixin container_box_shadow($width, $left, $h-offset, $color) {
+    position: absolute;
+    content: '';
+    width: $width;
+    height: 100%;
+    top: 0;
+    left: $left;
+    box-shadow: $h-offset 20px 50px -20px lighten($color, 10%);
+    z-index: -1;
+}
 @mixin button($background) {
     padding: 18px 30px;
     text-align: center;
@@ -40,6 +50,13 @@ $button_background: linear-gradient(130deg,
     display: flex;
     flex-wrap: wrap;
     text-align: left;
+}
+@mixin flex_child{
+    flex: 1 0 30%;
+    margin: 20px calc(10%/6);
+    background: #fff;
+    position: relative;
+    box-shadow: 0px 0px 48px 2px lighten($color_gray_light, 10%);
 }
 @mixin container($max-width){
     max-width: $max-width;
@@ -225,30 +242,12 @@ html {
     &__wrap{
         @include flex_wrap();
         div{
-            flex: 1 0 30%;
-            margin: 20px calc(10%/6);
-            background: #fff;
-            position: relative;
-            box-shadow: 0px 0px 48px 2px lighten($color_gray_light, 10%);
+            @include flex_child();
             &:after{
-                position: absolute;
-                content: '';
-                width: 50%;
-                height: 100%;
-                top: 0;
-                left: 50%;
-                box-shadow: -40px 20px 50px -20px lighten($color_blue, 15%);
-                z-index: -1;
+                @include container_box_shadow(50%, 50%, -40px, $color_blue);
             }
             &:before{
-                position: absolute;
-                content: '';
-                width: 50%;
-                height: 100%;
-                top: 0;
-                left: 0;
-                box-shadow: 1px 20px 50px -20px lighten($color_pink, 10%);
-                z-index: -1;
+                @include container_box_shadow(50%, 0, 1px, $color_pink);
             }
             @media all and (max-width: $breakpoint_small) {
                 flex-basis: 100%;
@@ -272,5 +271,61 @@ html {
                 }
             }
         }
+    }
+}
+.Services{
+    @include container(1200px);
+    h2{
+        @include subtitle();
+    }
+    &__wrap{
+        @include flex_wrap();
+        div{
+            @include flex_child();
+            &:nth-child(1) .Services__titles{
+                color: $color_pink;
+                &:before{
+                    @include container_box_shadow(100%, 0, 1px, $color_pink);
+                }
+            }
+            &:nth-child(2) .Services__titles{
+                color: $color_blue;
+                &:before{
+                    @include container_box_shadow(100%, 0, 1px, $color_blue);
+                }
+            }
+            &:nth-child(3) .Services__titles{
+                color: $color_yellow;
+                &:before{
+                    @include container_box_shadow(100%, 0, 1px, $color_pink);
+                }
+            }
+            @media all and (max-width: $breakpoint_small) {
+                flex-basis: 100%;
+                margin: 20px 0;
+            }
+            h3{
+                padding: 1em 10% 0;
+                margin: 0;
+                &:nth-of-type(3){
+                    padding-bottom: 1em;
+                }
+            }
+            p{
+                padding: 1em 10% 0;
+                margin: 0;
+                &:nth-of-type(4){
+                    padding-bottom: 1em;
+                }
+            }
+        }
+    }
+    &__titles{
+        font-size: 25px;
+    }
+    &__symbol{
+        position: absolute;
+        font-weight: 700;
+        padding: 1.2em 0 1.2 5%;
     }
 }
